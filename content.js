@@ -1,10 +1,10 @@
 chrome.runtime.onMessage.addListener(function(msg, sender){
-    if(msg == "toggle"){
-        toggle();
-    }
-    if(msg == "toggleToast"){
-        toggleToast();
-    }
+  if(msg == "toggle"){
+    toggle();
+  }
+  if(msg == "toggleToast"){
+    toggleToast();
+  }
 })
 
 var iframe = document.createElement('iframe');
@@ -20,7 +20,7 @@ iframe.style.transition = "width 2s";
 iframe.src = chrome.extension.getURL("panel.html");
 document.body.appendChild(iframe);
 
-var toast = document.createElement('div'); 
+var toast = document.createElement('div');
 toast.style.background = "gray";
 toast.style.height = "100px";
 toast.style.width = "0px";
@@ -33,19 +33,17 @@ toast.src = chrome.extension.getURL("toast.html");
 document.body.appendChild(toast);
 
 function toggle(){
-    if(iframe.style.width == "0px"){
-        iframe.style.width="450px";
-    }
-    else{
-        iframe.style.width="0px";
-    }
+  if (iframe.style.width == "0px") {
+    iframe.style.width="450px";
+  } else {
+    iframe.style.width="0px";
+  }
 }
 
-function toggleToast(){
-    if(iframe.style.width == "0px"){
-        iframe.style.width="200px";
-    }
-    else{
-        iframe.style.width="0px";
-    }
+function toggleToast() {
+  if (iframe.style.width == "0px"){
+    iframe.style.width="200px";
+  } else {
+    iframe.style.width="0px";
+  }
 }

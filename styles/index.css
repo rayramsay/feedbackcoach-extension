@@ -1,0 +1,28 @@
+.fbc-iframe {
+  height: 100%;
+  width: 450px;
+  position: fixed;
+  top: 0px;
+  right: -450px;
+  z-index: 2147483647;
+  transition: right 0.4s;
+}
+
+.fbc-toast {
+  height: 50px;
+  width: 200px;
+  position: fixed;
+  bottom: 50px;
+  right: -200px;
+  z-index: 2147483646;
+  transition: right 0.3s;
+  box-shadow: 0 0 4px 2px rgba(156,156,156,0.6);
+}
+
+.fbc-toast p {
+  height: 100%;
+  width: 100%;
+  line-height: 50px;
+  text-align: center;
+  vertical-align: middle;
+}

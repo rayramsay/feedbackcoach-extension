@@ -1,49 +1,60 @@
 chrome.runtime.onMessage.addListener(function(msg, sender){
+  console.log('message received', msg)
   if(msg == "toggle"){
-    toggle();
+    togglePanel();
   }
-  if(msg == "toggleToast"){
-    toggleToast();
+  if(msg == "openToast"){
+    openToast();
   }
 })
 
 var iframe = document.createElement('iframe');
-iframe.style.background = "gray";
-iframe.style.height = "100%";
-iframe.style.width = "0px";
-iframe.style.position = "fixed";
-iframe.style.top = "0px";
-iframe.style.right = "0px";
-iframe.style.zIndex = "9000000000000000000";
-iframe.frameBorder = "none";
-iframe.style.transition = "width 2s";
+iframe.classList.add("fbc-iframe");
 iframe.src = chrome.extension.getURL("panel.html");
 document.body.appendChild(iframe);
 
-var toast = document.createElement('div');
-toast.style.background = "gray";
-toast.style.height = "100px";
-toast.style.width = "0px";
-toast.style.position = "fixed";
-toast.style.bottom = "0px";
-toast.style.right = "0px";
-toast.style.zIndex = "9000000000000000000";
-toast.style.transition = "width 2s";
-toast.src = chrome.extension.getURL("toast.html");
+var toast = generateDOM(toastTemplate())
+toast.querySelector('a').onclick = togglePanel
 document.body.appendChild(toast);
 
-function toggle(){
-  if (iframe.style.width == "0px") {
-    iframe.style.width="450px";
+function togglePanel(){
+  if (iframe.style.right == "0px") {
+    closePanel()
   } else {
-    iframe.style.width="0px";
+    openPanel()
+    closeToast()
   }
 }
 
+function closePanel() {
+  iframe.style.right = "-450px";
+}
+
+function openPanel() {
+  iframe.style.right = "0px";
+}
+
 function toggleToast() {
-  if (iframe.style.width == "0px"){
-    iframe.style.width="200px";
+  if (toast.style.right == "0px"){
+    closeToast()
   } else {
-    iframe.style.width="0px";
+    openToast()
   }
+}
+
+function closeToast() {
+  toast.style.right = "-200px";
+}
+
+function openToast() {
+  // Only open the toast if the panel is not already open
+  if(iframe.style.right !== "0px") {
+    toast.style.right = "0px";
+  }
+}
+
+function generateDOM(htmlText) {
+  var div = document.createElement('div');
+  div.innerHTML = htmlText;
+  return div.children[0];
 }

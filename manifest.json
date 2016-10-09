@@ -11,7 +11,8 @@
       "matches": [
         "<all_urls>"
       ],
-      "js": ["content.js", "vendor/handlebars.min-latest.js"]
+      "css": ["styles/index.css"],
+      "js": ["vendor/handlebars.min-latest.js", "templates.js", "content.js"]
     }
   ],
 
@@ -20,6 +21,7 @@
   },
   "permissions": [
     "activeTab",
+    "webNavigation",
     "https://ajax.googleapis.com/"
   ],
   "web_accessible_resources": ["panel.html", "toast.html"]
